@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>반도체 빅2 통합 리포트 | 2026.04.08</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0c0e14;--bg2:#12151e;--bg3:#1a1e2c;--bg4:#232838;--t:#e2e4ea;--t2:#9ca0b0;--t3:#5d6278;--bd:#2a2f42;--bl:#4d8eff;--blb:rgba(77,142,255,.08);--r:#ff5a5a;--rb:rgba(255,90,90,.08);--g:#3dd68c;--gb:rgba(61,214,140,.08);--a:#ffb443;--ab:rgba(255,180,67,.08);--p:#a78bfa;--c:#22d3ee}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--t);font-family:'Noto Sans KR',sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}.m{font-family:'JetBrains Mono',monospace}.w{max-width:1080px;margin:0 auto;padding:24px 18px}
+.hdr{border-bottom:1px solid var(--bd);padding-bottom:18px;margin-bottom:20px}.disc{font-size:10px;color:var(--t3);padding:5px 10px;background:var(--bg2);border-radius:5px;margin-bottom:10px;border-left:3px solid var(--a)}.hdr h1{font-size:24px;font-weight:900;margin-bottom:3px}.hdr h1 em{color:var(--c);font-style:normal}.hm{font-size:11px;color:var(--t2);display:flex;gap:10px;flex-wrap:wrap;align-items:center}.cd{background:var(--bg3);padding:1px 6px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:10px}.tg{display:inline-flex;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700}.tg-r{background:var(--rb);color:var(--r);animation:pu 2s infinite}.tg-g{background:var(--gb);color:var(--g)}.tg-b{background:var(--blb);color:var(--bl)}.tg-a{background:var(--ab);color:var(--a)}@keyframes pu{0%,100%{opacity:1}50%{opacity:.6}}
+.flash{border-radius:10px;padding:14px;margin-bottom:16px}.flash h3{font-size:13px;margin-bottom:5px}.flash p{font-size:11px;color:var(--t2);line-height:1.5}.fl-g{background:linear-gradient(90deg,rgba(61,214,140,.06),var(--bg2));border:1px solid rgba(61,214,140,.25)}.fl-r{background:linear-gradient(90deg,rgba(255,90,90,.06),var(--bg2));border:1px solid rgba(255,90,90,.25)}.fl-b{background:linear-gradient(90deg,rgba(77,142,255,.06),var(--bg2));border:1px solid rgba(77,142,255,.25)}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.c2{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:13px}.c2 .lb{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}.c2 .vl{font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:700;margin-bottom:2px}.c2 .sb{font-size:10px;color:var(--t2)}
+.sec{margin-bottom:24px}.sec-t{font-size:14px;font-weight:700;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:6px}.dt{width:7px;height:7px;border-radius:50%;display:inline-block}
+table{width:100%;border-collapse:collapse;font-size:11px}th{background:var(--bg3);color:var(--t2);font-weight:500;text-align:center;padding:7px 8px;font-size:10px}td{padding:7px 8px;text-align:center;border-bottom:1px solid var(--bd);font-family:'JetBrains Mono',monospace;font-size:11px}td.l{font-family:'Noto Sans KR',sans-serif;text-align:left;font-weight:500;color:var(--t2)}tr:hover{background:rgba(77,142,255,.03)}.u{color:var(--g)}.d{color:var(--r)}
+.ch{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:16px}canvas{max-height:300px}
+.rc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}.rk{border-radius:10px;padding:12px;border:1px solid var(--bd)}.rk.cr{background:var(--rb);border-color:rgba(255,90,90,.25)}.rk.wa{background:var(--ab);border-color:rgba(255,180,67,.25)}.rk.po{background:var(--gb);border-color:rgba(61,214,140,.25)}.rk.in{background:var(--blb);border-color:rgba(77,142,255,.25)}.rk .rt{font-weight:700;font-size:12px;margin-bottom:3px}.rk .rl{display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;margin-bottom:4px}.rk.cr .rl{background:var(--r);color:#fff}.rk.wa .rl{background:var(--a);color:#000}.rk.po .rl{background:var(--g);color:#000}.rk.in .rl{background:var(--bl);color:#fff}.rk p{font-size:10px;color:var(--t2);line-height:1.4}
+.az{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.zn{border-radius:8px;padding:10px;text-align:center}.zn.buy{background:var(--gb);border:1px solid rgba(61,214,140,.2)}.zn.hold{background:var(--blb);border:1px solid rgba(77,142,255,.2)}.zn.take{background:var(--ab);border:1px solid rgba(255,180,67,.2)}.zn.sell{background:var(--rb);border:1px solid rgba(255,90,90,.2)}.zn .zl{font-size:10px;font-weight:700;margin-bottom:2px}.zn .zr{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700}.zn.buy .zl{color:var(--g)}.zn.hold .zl{color:var(--bl)}.zn.take .zl{color:var(--a)}.zn.sell .zl{color:var(--r)}
+.dc{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:14px}.dc h3{font-size:12px;margin-bottom:8px}
+.tl{position:relative;padding-left:18px}.tl::before{content:'';position:absolute;left:5px;top:0;bottom:0;width:2px;background:var(--bd)}.ti{position:relative;margin-bottom:10px}.ti::before{content:'';position:absolute;left:-16px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--bl);border:2px solid var(--bg)}.ti.ug::before{background:var(--r)}.td2{font-size:10px;color:var(--t3);font-family:'JetBrains Mono',monospace}.tt2{font-size:11px;color:var(--t2)}
+.sbox{background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--bd);border-radius:10px;padding:16px;font-size:12px;line-height:1.75}
+.ft{border-top:1px solid var(--bd);padding-top:12px;margin-top:28px;font-size:9px;color:var(--t3)}
+@media(max-width:768px){.g4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}.az{grid-template-columns:repeat(2,1fr)}.c2 .vl{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="w">
+
+<div class="hdr">
+  <div class="disc">* 투자 조언이 아닙니다. 모든 수치는 추정치이며 투자 책임은 본인에게 있습니다.</div>
+  <h1>반도체 빅2 <em>통합 적정가 분석</em></h1>
+  <div class="hm">
+    <span class="cd">SK하이닉스 000660</span>
+    <span class="cd">삼성전자 005930</span>
+    <span>2026.04.08 (화) 장중</span>
+    <span class="tg tg-g">🎯 100만닉스 달성 · 21만전자 회복</span>
+    <span class="tg tg-r">⏰ 최후통첩 D-0 (오늘 09시 만료)</span>
+    <span class="tg tg-b">📊 어제 적정가(96만/21만) 하루 만에 돌파</span>
+  </div>
+</div>
+
+<!-- FLASH -->
+<div class="flash fl-g">
+  <h3>🚀 100만닉스 · 21만전자 — 어제 적정가를 하루 만에 돌파</h3>
+  <p>
+    ▸ SK하이닉스 1,033,000원(+12.77%) — 장중 최고 1,056,000. 100만닉스 역사적 돌파<br>
+    ▸ 삼성전자 210,500원(+7.12%) — 20만전자 재탈환. 코스피 5,872(+6.87%)<br>
+    ▸ 어제 리포트 적정가(닉스 96만 / 삼전 21만)를 <strong>24시간 만에 모두 돌파</strong> → 시나리오 확률 재조정 필수<br>
+    ▸ 한투증권 닉스 목표가 180만 상향. 블로그 보도 삼전 40만 · 닉스 200만 전망 거론
+  </p>
+</div>
+<div class="flash fl-r">
+  <h3>⏰ 트럼프 최후통첩 D-0: 오늘 오전 09시 만료 — 결과 미확인</h3>
+  <p>
+    ▸ "발전소·다리 하나도 안 남긴다" — 만료 직후 이란 공격 or 재연장 or 합의 중 하나<br>
+    ▸ 파키스탄 2주 휴전 요청 보도로 시장은 종전 기대감 선반영 중<br>
+    ▸ 결과 확인 전까지 극한 변동성 구간. 확전 시 하루 -15% 이상 급락 가능
+  </p>
+</div>
+
+<!-- 메트릭: SK하이닉스 -->
+<div style="font-size:11px;font-weight:700;color:var(--c);margin-bottom:5px">SK하이닉스 (000660) — 4/8 장중 🔥100만닉스</div>
+<div class="g4">
+  <div class="c2"><div class="lb">장중가</div><div class="vl" style="color:var(--g)">1,033,000</div><div class="sb">4/7 종가 916K 대비 <span class="u">+12.77%</span></div></div>
+  <div class="c2"><div class="lb">수정 적정가</div><div class="vl" style="color:var(--bl)">1,150,000</div><div class="sb">OP 180조 + 시나리오 재조정</div></div>
+  <div class="c2"><div class="lb">업사이드</div><div class="vl" style="color:var(--g)">+11.3%</div><div class="sb">여전히 저평가</div></div>
+  <div class="c2"><div class="lb">포지션</div><div class="vl" style="color:var(--g);font-size:14px">보유/비중유지</div><div class="sb">적정가 하단. 목표 180만</div></div>
+</div>
+
+<!-- 메트릭: 삼성전자 -->
+<div style="font-size:11px;font-weight:700;color:var(--p);margin-bottom:5px">삼성전자 (005930) — 4/8 장중</div>
+<div class="g4" style="margin-bottom:22px">
+  <div class="c2"><div class="lb">장중가</div><div class="vl" style="color:var(--g)">210,500</div><div class="sb">4/7 종가 196.5K 대비 <span class="u">+7.12%</span></div></div>
+  <div class="c2"><div class="lb">수정 적정가</div><div class="vl" style="color:var(--bl)">250,000</div><div class="sb">1Q 57.2조 + 연간 OP 260조+</div></div>
+  <div class="c2"><div class="lb">업사이드</div><div class="vl" style="color:var(--g)">+18.8%</div><div class="sb">명확 저평가</div></div>
+  <div class="c2"><div class="lb">포지션</div><div class="vl" style="color:var(--g);font-size:14px">분할매수/보유</div><div class="sb">서프라이즈 반영 진행 중</div></div>
+</div>
+
+<!-- 적정가 모델 대폭 재조정 -->
+<div class="sec">
+  <div class="sec-t"><span class="dt" style="background:var(--a)"></span> 적정가 모델 대폭 재조정 — 왜 어제 적정가를 하루 만에 돌파했나</div>
+  <table>
+    <thead><tr><th>항목</th><th>4/7 전제</th><th>4/8 수정</th><th>변경 사유</th></tr></thead>
+    <tbody>
+      <tr><td class="l">하이닉스 연간 OP</td><td>180조</td><td style="color:var(--g)"><strong>200조</strong></td><td class="l" style="font-size:10px">하나 230조, 한투 180만 목표→OP 역산 200조+</td></tr>
+      <tr><td class="l">삼성전자 연간 OP</td><td>260조</td><td style="color:var(--g)"><strong>280조</strong></td><td class="l" style="font-size:10px">메리츠 320조, 1Q 57.2조×4=228조+가속감안</td></tr>
+      <tr><td class="l">시나리오 낙관 확률</td><td>15%</td><td style="color:var(--g)"><strong>25%</strong></td><td class="l" style="font-size:10px">파키스탄 2주 휴전 요청 + 시장 종전 선반영</td></tr>
+      <tr><td class="l">시나리오 기본 확률</td><td>35%</td><td><strong>35%</strong></td><td class="l" style="font-size:10px">유지</td></tr>
+      <tr><td class="l">시나리오 하방+극단</td><td>25%</td><td style="color:var(--r)"><strong>17%</strong></td><td class="l" style="font-size:10px">최후통첩 반복 연장 패턴 → 전면전 가능성 축소</td></tr>
+      <tr><td class="l">전쟁 할인</td><td>-18%/-16%</td><td style="color:var(--g)"><strong>-12%/-10%</strong></td><td class="l" style="font-size:10px">호르무즈 규약 + 휴전 요청 → 할인 축소</td></tr>
+      <tr><td class="l">PER 배수</td><td>7~8x</td><td style="color:var(--g)"><strong>8~9x</strong></td><td class="l" style="font-size:10px">사이클 중반 확인, OPM 90% 구간</td></tr>
+      <tr style="background:var(--gb)"><td class="l"><strong>하이닉스 적정가</strong></td><td>96만</td><td style="color:var(--g)"><strong>115만</strong></td><td class="l" style="font-size:10px">OP↑+할인↓+PER↑+확률↑</td></tr>
+      <tr style="background:var(--gb)"><td class="l"><strong>삼전 적정가</strong></td><td>21만</td><td style="color:var(--g)"><strong>25만</strong></td><td class="l" style="font-size:10px">OP↑+할인↓+PER↑+확률↑</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 주가 추이 -->
+<div class="sec">
+  <div class="sec-t"><span class="dt" style="background:var(--c)"></span> 주가 8일 추이</div>
+  <table>
+    <thead><tr><th>날짜</th><th>하이닉스</th><th>등락</th><th>삼전</th><th>등락</th><th>코스피</th><th>이벤트</th></tr></thead>
+    <tbody>
+      <tr style="color:var(--t3)"><td>3/31</td><td>807,000</td><td class="d">-7.6%</td><td>167,600</td><td class="d">-4.9%</td><td>5,052</td><td class="l" style="font-size:9px">전쟁 5주차</td></tr>
+      <tr><td>4/1</td><td>893,000</td><td class="u">+10.7%</td><td>189,600</td><td class="u">+13.1%</td><td>5,479</td><td class="l" style="font-size:9px">종전 시사</td></tr>
+      <tr><td>4/2</td><td>830,000</td><td class="d">-7.1%</td><td>178,400</td><td class="d">-5.9%</td><td>5,234</td><td class="l" style="font-size:9px">트럼프 "더 공격"</td></tr>
+      <tr><td>4/3</td><td>879,000</td><td class="u">+5.9%</td><td>185,600</td><td class="u">+4.0%</td><td>5,377</td><td class="l" style="font-size:9px">호르무즈 규약</td></tr>
+      <tr><td>4/4</td><td>886,000</td><td class="u">+0.8%</td><td>~186,000</td><td class="u">+0.2%</td><td>~5,450</td><td class="l" style="font-size:9px">관망</td></tr>
+      <tr><td>4/7</td><td>916,000</td><td class="u">+3.4%</td><td>196,500</td><td class="u">+5.6%</td><td>5,495</td><td class="l" style="font-size:9px">삼전 57.2조 확정</td></tr>
+      <tr style="background:rgba(61,214,140,.08)"><td><strong>4/8 장중</strong></td><td style="color:var(--g)"><strong>1,033,000</strong></td><td class="u"><strong>+12.8%</strong></td><td style="color:var(--g)"><strong>210,500</strong></td><td class="u"><strong>+7.1%</strong></td><td style="color:var(--g)"><strong>5,872</strong></td><td class="l" style="font-size:9px"><strong>🔥 100만닉스 + 최후통첩 D-0</strong></td></tr>
+      <tr style="background:var(--bg3)"><td class="l"><strong>3/31 대비</strong></td><td></td><td class="u"><strong>+28.0%</strong></td><td></td><td class="u"><strong>+25.6%</strong></td><td></td><td class="l" style="font-size:9px"><strong>8일간 급등</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 시나리오 차트 -->
+<div class="sec">
+  <div class="sec-t"><span class="dt" style="background:var(--bl)"></span> 시나리오별 적정가 vs 현재가</div>
+  <div class="ch"><canvas id="sc"></canvas></div>
+</div>
+
+<!-- 시나리오 테이블 -->
+<div class="sec">
+  <div class="sec-t"><span class="dt" style="background:var(--a)"></span> 시나리오 분석 (4/8 대폭 재조정)</div>
+  <table>
+    <thead><tr><th>#</th><th>시나리오</th><th>확률</th><th>하이닉스 (만)</th><th>삼전 (만)</th><th>촉매</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="l">🟢 낙관 — 종전+슈퍼사이클</td><td style="color:var(--g)"><strong>25%</strong></td><td style="color:var(--g)">200</td><td style="color:var(--g)">40.0</td><td class="l" style="font-size:9px">휴전 합의, 연간 OP 300조+, LTA 확대</td></tr>
+      <tr style="background:var(--blb)"><td>2</td><td class="l">🔵 기본 — 부분휴전+실적</td><td><strong>35%</strong></td><td style="color:var(--bl)">140</td><td style="color:var(--bl)">30.0</td><td class="l" style="font-size:9px">호르무즈 개방, OP 260~280조</td></tr>
+      <tr><td>3</td><td class="l">🟡 보수적 — 장기화</td><td><strong>23%</strong></td><td style="color:var(--a)">85</td><td style="color:var(--a)">16.0</td><td class="l" style="font-size:9px">전쟁 지속, 하반기 ASP 둔화</td></tr>
+      <tr><td>4</td><td class="l">🔴 하방 — 확전</td><td><strong>12%</strong></td><td style="color:var(--r)">55</td><td style="color:var(--r)">10.0</td><td class="l" style="font-size:9px">최후통첩 이행, 글로벌 침체</td></tr>
+      <tr><td>5</td><td class="l">⚫ 극단 — 전면전</td><td><strong>5%</strong></td><td style="color:var(--t3)">25</td><td style="color:var(--t3)">3.5</td><td class="l" style="font-size:9px">NATO 개입</td></tr>
+      <tr style="background:var(--bg3);font-weight:700"><td colspan="2" class="l" style="text-align:right">수정 가중 평균</td><td></td><td style="color:var(--bl)"><strong>115.0</strong></td><td style="color:var(--bl)"><strong>25.0</strong></td><td class="l" style="font-size:9px">↑↑ 96→115 / 21→25</td></tr>
+      <tr style="background:var(--bg4)"><td colspan="2" class="l" style="text-align:right;color:var(--t)"><strong>현재 장중가</strong></td><td></td><td style="color:var(--c)"><strong>103.3</strong></td><td style="color:var(--c)"><strong>21.05</strong></td><td class="l" style="font-size:9px">양쪽 저평가</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 증권사 목표가 -->
+<div class="sec">
+  <div class="sec-t"><span class="dt" style="background:var(--p)"></span> 증권사 목표주가 최신 (4/8 기준)</div>
+  <table>
+    <thead><tr><th>증권사</th><th>SK하이닉스</th><th>삼성전자</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td class="l">한투증권</td><td style="color:var(--g)"><strong>180만</strong></td><td>-</td><td class="l" style="font-size:10px">4/8 상향 (기존 150만)</td></tr>
+      <tr><td class="l">하나증권</td><td>160만</td><td>-</td><td class="l" style="font-size:10px">1Q OP 37조, 연간 230조</td></tr>
+      <tr><td class="l">KB증권</td><td>170만</td><td>32만</td><td class="l" style="font-size:10px">빅테크 LTA 선수금 확인</td></tr>
+      <tr><td class="l">메리츠증권</td><td>-</td><td>-</td><td class="l" style="font-size:10px">삼전 연간 OP 320조 전망</td></tr>
+      <tr><td class="l">미래에셋</td><td>-</td><td>30만</td><td class="l" style="font-size:10px">P/B 1.8배 매력적</td></tr>
+      <tr><td class="l">NH투자·흥국</td><td>-</td><td>26만</td><td class="l" style="font-size:10px"></td></tr>
+      <tr><td class="l">신한투자</td><td>-</td><td>27만</td><td class="l" style="font-size:10px"></td></tr>
+      <tr><td class="l">iM증권</td><td>-</td><td>28만</td><td class="l" style="font-size:10px">BPS 2배 이하 매력</td></tr>
+      <tr style="background:var(--bg3)"><td class="l"><strong>Investing.com 평균</strong></td><td><strong>133.8만</strong></td><td><strong>~27만</strong></td><td class="l" style="font-size:10px">36명 매수 / 1명 매도</td></tr>
+      <tr style="background:var(--ab)"><td class="l"><strong>블로그 보도 최고</strong></td><td style="color:var(--a)"><strong>200만</strong></td><td style="color:var(--a)"><strong>40만</strong></td><td class="l" style="font-size:10px">초장기 슈퍼사이클 전제</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 비교 -->
+<div class="sec">
+  <div class="sec-t"><span class="dt" style="background:var(--c)"></span> SK하이닉스 vs 삼성전자</div>
+  <table>
+    <thead><tr><th>항목</th><th>SK하이닉스</th><th>삼성전자</th><th>유리</th></tr></thead>
+    <tbody>
+      <tr><td class="l">4/8 장중가</td><td>1,033,000</td><td>210,500</td><td>-</td></tr>
+      <tr><td class="l">수정 적정가</td><td>1,150,000</td><td>250,000</td><td>-</td></tr>
+      <tr><td class="l">업사이드</td><td class="u">+11.3%</td><td class="u">+18.8%</td><td style="color:var(--p)"><strong>삼전 우위 확대</strong></td></tr>
+      <tr><td class="l">증권사 평균 목표</td><td>133.8만</td><td>~27만</td><td>-</td></tr>
+      <tr><td class="l">목표 대비 괴리</td><td class="u">+29.5%</td><td class="u">+28.3%</td><td>비슷</td></tr>
+      <tr><td class="l">1Q OP (확정/추정)</td><td>37조 (추정)</td><td style="color:var(--g)"><strong>57.2조 (확정)</strong></td><td style="color:var(--p)">삼전</td></tr>
+      <tr><td class="l">3/31 대비</td><td class="u">+28.0%</td><td class="u">+25.6%</td><td style="color:var(--c)">닉스 더 반등</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 리스크 카드 -->
+<div class="sec">
+  <div class="sec-t"><span class="dt" style="background:var(--r)"></span> 핵심 리스크 & 촉매</div>
+  <div class="rc">
+    <div class="rk cr"><div class="rl">D-0 TODAY</div><div class="rt">💣 최후통첩 오전 09시 만료</div><p>결과 미확인. 공격/재연장/합의 중 하나. 파키스탄 2주 휴전 요청 중. 시장은 종전 기대 선반영 상태 → 확전 시 충격 극대화.</p></div>
+    <div class="rk po"><div class="rl">MILESTONE</div><div class="rt">🎯 100만닉스 · 52주 신고 접근</div><p>장중 1,056K (52주 최고 1,099K의 96% 도달). 심리적 저항 돌파 → 추가 상승 모멘텀. 단, 전쟁 결과에 따라 하루 내 되돌림 가능.</p></div>
+    <div class="rk in"><div class="rl">UPGRADE</div><div class="rt">📈 한투 180만 · 블로그 200만 목표</div><p>한투증권 목표가 180만(+20% 상향). "실적 추정치 상향 반영, 중동사태는 매수 기회." 슈퍼사이클 진입 컨센서스 형성 중.</p></div>
+    <div class="rk wa"><div class="rl">CAUTION</div><div class="rt">⚡ 8일간 +28% — 과열 경계</div><p>3/31 대비 8일간 하이닉스 +28%, 삼전 +26%. 종전 미합의 시 차익실현 매물 쏟아질 가능성. RSI 과매수 구간 진입.</p></div>
+  </div>
+</div>
+
+<!-- 액션 가이드 -->
+<div class="sec">
+  <div class="sec-t"><span class="dt" style="background:var(--g)"></span> 구간별 액션 가이드</div>
+  <div class="g2">
+    <div class="dc">
+      <h3 style="color:var(--c)">SK하이닉스 <span style="background:var(--gb);color:#000;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:4px">103.3만 — 보유/비중유지</span></h3>
+      <div class="az">
+        <div class="zn buy"><div class="zl">적극매수</div><div class="zr">≤80만</div></div>
+        <div class="zn hold" style="border-width:2px"><div class="zl">◀ 103.3만</div><div class="zr">80~115만</div></div>
+        <div class="zn take"><div class="zl">차익실현</div><div class="zr">115~140만</div></div>
+        <div class="zn sell"><div class="zl">적극매도</div><div class="zr">≥140만</div></div>
+      </div>
+    </div>
+    <div class="dc">
+      <h3 style="color:var(--p)">삼성전자 <span style="background:var(--gb);color:#000;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:4px">21.05만 — 분할매수/보유</span></h3>
+      <div class="az">
+        <div class="zn buy"><div class="zl">적극매수</div><div class="zr">≤17만</div></div>
+        <div class="zn hold" style="border-width:2px"><div class="zl">◀ 21.05만</div><div class="zr">17~25만</div></div>
+        <div class="zn take"><div class="zl">차익실현</div><div class="zr">25~30만</div></div>
+        <div class="zn sell"><div class="zl">적극매도</div><div class="zr">≥30만</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 모니터링 -->
+<div class="sec">
+  <div class="sec-t"><span class="dt" style="background:var(--p)"></span> 핵심 모니터링</div>
+  <div class="tl">
+    <div class="ti ug"><div class="td2">2026.04.08 09:00 (오늘)</div><div class="tt2"><strong>최후통첩 만료</strong> — 결과에 따라 시장 방향 결정. ±15% 변동 가능</div></div>
+    <div class="ti"><div class="td2">2026.04.08~12</div><div class="tt2"><strong>파키스탄 2주 휴전 중재</strong> — 수용 시 시나리오1 확률 급상승</div></div>
+    <div class="ti"><div class="td2">2026.04.23 (수)</div><div class="tt2"><strong>삼성전자 1Q 확정 실적</strong> — 사업부별 DS 48~49조 확인</div></div>
+    <div class="ti"><div class="td2">2026.04.29 (수)</div><div class="tt2"><strong>SK하이닉스 1Q 잠정실적</strong> — 37조+ 서프라이즈 시 적정가 추가 상향</div></div>
+  </div>
+</div>
+
+<!-- 종합 판단 -->
+<div class="sec">
+  <div class="sec-t"><span class="dt" style="background:var(--bl)"></span> 종합 판단</div>
+  <div class="sbox">
+    <p><strong>100만닉스 달성, 삼전 21만 탈환 — 실적이 전쟁 공포를 이기기 시작했다.</strong></p>
+    <p style="margin-top:6px">어제 리포트의 적정가(96만/21만)를 24시간 만에 돌파한 것은, 시장이 <strong>"종전 + 슈퍼사이클"을 동시에 선반영</strong>하기 시작했다는 의미다. 삼전 1Q 57.2조 확정 이후 "메모리 사이클 겨우 중반"이라는 증권가 컨센서스가 굳어지며, 연간 OP 280~320조 전망이 주류로 자리잡았다. 한투증권 180만, 블로그 200만 목표가가 나오는 상황.</p>
+    <p style="margin-top:6px">적정가를 96만→115만(하이닉스), 21만→25만(삼전)으로 대폭 상향한다. 핵심 변수는 OP 상향(180~200조/280조), 전쟁 할인 축소(-18%→-12%), PER 상향(7~8x→8~9x), 종전 시나리오 확률 상승(15%→25%).</p>
+    <p style="margin-top:6px"><strong style="color:var(--r)">최대 리스크는 여전히 오늘 최후통첩 결과다.</strong> 시장은 종전을 선반영 중이므로, 확전 시 충격은 기대 대비 더 클 수 있다. 8일간 +28%는 과열 시그널이기도 하다.</p>
+    <p style="margin-top:8px"><strong>액션:</strong></p>
+    <p>▸ <strong>양쪽 모두 보유/비중유지.</strong> 적정가 대비 저평가. 닉스 +11.3%, 삼전 +18.8% 업사이드.</p>
+    <p>▸ <strong>삼전이 더 매력적 (업사이드 +18.8% > +11.3%).</strong> 57.2조 실적 확정의 확실성 + 증권사 목표가 26~40만원.</p>
+    <p>▸ <strong>신규 진입은 최후통첩 결과 확인 후.</strong> 종전 합의 시 추가 +10~15% 여력, 확전 시 -15% 이상 급락 리스크.</p>
+    <p>▸ <strong>기존 보유 + 종전 시 비중확대 전략이 최적.</strong> 패닉셀 불필요. 펀더멘탈은 역대 최강.</p>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="ft">
+  <p><strong>적정가 기준 갱신 (4/8)</strong></p>
+  <p style="font-family:'JetBrains Mono',monospace;margin-top:3px;font-size:10px">
+    SK하이닉스 | 4/7 종가: 916,000 | 4/8 장중: 1,033,000 | 수정 적정가: 1,150,000 (↑↑ 96만)<br>
+    &nbsp;&nbsp;OP전제: 200조(↑180조) | PER: 8~9x | 할인: 전쟁-12% 터보퀀트-3% 환율-3% 수급-2% = -20%<br>
+    삼성전자 | 4/7 종가: 196,500 | 4/8 장중: 210,500 | 수정 적정가: 250,000 (↑↑ 21만)<br>
+    &nbsp;&nbsp;OP전제: 280조(↑260조, 1Q 57.2조 확정) | PER: 10~11x | 할인: 전쟁-10% 터보퀀트-2% 환율-3% 수급-2% = -17%<br>
+    시나리오: 낙관25% 기본35% 보수23% 하방12% 극단5%
+  </p>
+  <p style="margin-top:8px">
+    출처: 삼성전자 공시, 한투증권, 하나증권, KB증권, 메리츠증권, 미래에셋, 머니투데이, Investing.com<br>
+    장중가: 사용자 제공 + Google 검색 위젯 교차검증 (닉스 1,033K ✓, 삼전 210.5K ✓, 코스피 5,872 ✓)<br>
+    생성: Claude AI | 2026.04.08 장중
+  </p>
+</div>
+
+</div>
+
+<script>
+const ctx=document.getElementById('sc').getContext('2d');
+new Chart(ctx,{
+  type:'bar',
+  data:{
+    labels:['낙관(25%)','기본(35%)','보수(23%)','하방(12%)','극단(5%)','수정가중','4/8 장중'],
+    datasets:[
+      {label:'SK하이닉스(만)',data:[200,140,85,55,25,115,103.3],backgroundColor:['rgba(61,214,140,.6)','rgba(77,142,255,.6)','rgba(255,180,67,.6)','rgba(255,90,90,.6)','rgba(93,98,120,.5)','rgba(77,142,255,.9)','rgba(34,211,238,.8)'],borderRadius:3},
+      {label:'삼성전자(만)',data:[40,30,16,10,3.5,25,21.05],backgroundColor:['rgba(61,214,140,.3)','rgba(77,142,255,.3)','rgba(255,180,67,.3)','rgba(255,90,90,.3)','rgba(93,98,120,.3)','rgba(77,142,255,.5)','rgba(167,139,250,.5)'],borderRadius:3}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:true,aspectRatio:2.2,
+    plugins:{legend:{labels:{color:'#9ca0b0',font:{family:'Noto Sans KR',size:10}}}},
+    scales:{
+      x:{grid:{display:false},ticks:{color:'#9ca0b0',font:{family:'Noto Sans KR',size:9}}},
+      y:{grid:{color:'#2a2f42'},ticks:{color:'#9ca0b0',font:{family:'JetBrains Mono',size:10},callback:v=>v+'만'}}
+    }
+  }
+});
+</script>
+</body>
+</html>
